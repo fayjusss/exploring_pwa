@@ -28,4 +28,10 @@ const renderTodo = (data, id) => {
   `;
 
   todoitems.innerHTML += html;
-}
+};
+
+// remove todo
+const removeTodo = (id) => {
+  const todo = document.querySelector(`.todo[data-id=${id}]`);
+  todo.remove();
+};

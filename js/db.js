@@ -21,6 +21,34 @@ db.collection('todo-items').onSnapshot((snapshot) => {
     }
     if(change.type === 'removed'){
       // remove the document data to the web page
+      removeTodo(change.doc.id);
     }
-  })
+  });
+});
+
+// add new todo
+const form = document.querySelector('form');
+form.addEventListener('submit', evt => {
+  evt.preventDefault();
+  
+  const todo = {
+    name: form.title.value,
+    description: form.description.value
+  };
+
+  db.collection('todo-items').add(todo)
+    .catch(err => console.log(err));
+
+  form.title.value = '';
+  form.description.value = '';
+});
+
+// remove a todo
+const todoContainer = document.querySelector('.todos');
+todoContainer.addEventListener('click', evt => {
+  if(evt.target.tagName === 'I'){
+    const id = evt.target.getAttribute('data-id');
+    //console.log(id);
+    db.collection('todo-items').doc(id).delete();
+  }
 })
