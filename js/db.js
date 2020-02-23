@@ -14,7 +14,7 @@ db.enablePersistence()
 
 db.collection('todo-items').onSnapshot((snapshot) => {
   snapshot.docChanges().forEach((change) => {
-    console.log(change, change.doc.data(), change.doc.id)
+    console.log(change.doc.data().name)
     if(change.type === 'added'){
       // add the document data to the web page
       renderTodo(change.doc.data(), change.doc.id);
@@ -32,15 +32,15 @@ form.addEventListener('submit', evt => {
   evt.preventDefault();
   
   const todo = {
-    name: form.title.value,
+    name: form.name.value,
     description: form.description.value
   };
 
   db.collection('todo-items').add(todo)
     .catch(err => console.log(err));
 
-  form.title.value = '';
-  form.description.value = '';
+  form.name.value = "";
+  form.description.value = "";
 });
 
 // remove a todo

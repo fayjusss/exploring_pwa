@@ -18,7 +18,7 @@ const renderTodo = (data, id) => {
       <span></span>
     </label>
     <div class="todo-details">
-      <div class="todo-title">${data.title}</div>
+      <div class="todo-name">${data.name}</div>
       <div class="todo-description">${data.description}</div>
     </div>
     <div class="todo-delete">
